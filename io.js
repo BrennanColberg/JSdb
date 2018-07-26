@@ -14,8 +14,8 @@ function loadData() {
 	let vars = cookie.split(';');
 	for (let i = 0; i < vars.length; i++) {
 		let parts = vars[i].split('=');
-		if (parts[0].trim === "data") {
-			let json = part[1].trim;
+		if (parts[0] === "data") {
+			let json = parts[1];
 			let data = JSON.parse(json);
 			return data;
 		}
