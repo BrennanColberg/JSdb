@@ -3,17 +3,19 @@
 	
 	window.addEventListener("load", function() {
 		
-		let object = {"name":"brennan", "working":true};
-		console.log(JSON.stringify(object));
-		
-		saveData(object, 1);
-		
-		console.log(JSON.stringify(loadData()));
-		
-		eraseData();
-		
-		console.log(JSON.stringify(loadData()));
+		$("save").onclick = putCookie;
+		$("load").onclick = getCookie;
 		
 	});
+	
+	function putCookie() {
+		save({"name":"brennan", "working":true});
+	}
+	
+	function getCookie() {
+		let json = JSON.stringify(load());
+		console.log();
+		$("output").textContent = json;
+	}
 	
 }();
