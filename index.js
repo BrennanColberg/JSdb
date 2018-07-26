@@ -9,11 +9,11 @@
 	});
 	
 	function putCookie() {
-		save({"name":"brennan", "working":true});
+		save(JSON.stringify({"name":"brennan", "working":true}));
 	}
 	
 	function getCookie() {
-		let json = JSON.stringify(load());
+		let json = load();
 		console.log();
 		$("output").textContent = json;
 	}
