@@ -18,8 +18,13 @@ function loadCookie(title, path = "/") {
 			return parts[1];
 		}
 	}
+	return undefined;
 }
 
 function eraseCookie(title, path = "/") {
 	saveCookie(title, "", path, -1);
+}
+
+function cookieExists(title, path = "/") {
+	return loadCookie(title, path) !== undefined;
 }
