@@ -25,6 +25,10 @@ function eraseCookie(title, path = "/") {
 	saveCookie(title, "", path, -1);
 }
 
+function cookieEquals(value, title, path = "/") {
+	return loadCookie(title, path) !== value;
+}
+
 function cookieExists(title, path = "/") {
-	return loadCookie(title, path) !== undefined;
+	return cookieEquals(undefined, title, path);
 }
