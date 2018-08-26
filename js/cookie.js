@@ -3,9 +3,9 @@ const MS_PER_DAY = 1000 * 60 * 60 * 24;
 function saveCookie(title, data, path = "/", days = 30) {
 	let date = new Date();
 	date.setTime(date.getTime() + (days * MS_PER_DAY));
-	let dataString = "data=" + data + ";";
+	let dataString = title.trim() + "=" + data + ";";
 	let expirationString = "expires=" + date.toUTCString() + ";";
-	let pathString = title.trim() + "=" + path;
+	let pathString = "path=" + path;
 	document.cookie = dataString + expirationString + pathString;
 }
 
