@@ -14,8 +14,8 @@ function loadCookie(title, path = "/") {
 	let vars = cookie.split(';');
 	for (let i = 0; i < vars.length; i++) {
 		let parts = vars[i].split('=');
-		if (parts[0] === title.trim()) {
-			return parts[1];
+		if (parts[0].trim() === title.trim()) {
+			return parts[1].trim();
 		}
 	}
 	return undefined;
