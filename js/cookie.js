@@ -26,9 +26,9 @@ function eraseCookie(title, path = "/") {
 }
 
 function cookieEquals(value, title, path = "/") {
-	return loadCookie(title, path) !== value;
+	return loadCookie(title, path) == value;
 }
 
 function cookieExists(title, path = "/") {
-	return cookieEquals(undefined, title, path);
+	return !cookieEquals(undefined, title, path);
 }
