@@ -47,10 +47,10 @@
 	}
 
 	function generateArticle(dom, text) {
-		let subsections = text.split("\n\n");
-		for (let i = 0; i < subsections.length; i++) {
-			let subsection = subsections[i];
-			let lines = subsection.split("\n");
+		let sections = text.split("\n\n");
+		for (let i = 0; i < sections.length; i++) {
+			let div = ce("div");
+			let lines = sections[i].split("\n");
 			for (let j = 0; j < lines.length; j++) {
 				let line = lines[j];
 
@@ -63,7 +63,7 @@
 					// remove indicator
 					line = line.substr(headerNumber, line.length - 1);
 					// add element!
-					dom.appendChild(ce("h" + headerNumber, null, line));
+					div.appendChild(ce("h" + headerNumber, null, line));
 				}
 
 				// list (only one layer deep as of yet)
@@ -75,15 +75,22 @@
 						line = lines[j].substr(1, lines[j].length - 1);
 						list.appendChild(ce("li", null, line));
 					}
-					dom.appendChild(list);
+					div.appendChild(list);
 				}
 
 				// paragraph
 				else {
-					dom.appendChild(ce("p", null, line));
+					div.appendChild(ce("p", null, line));
 				}
-
 			}
+
+			// creates div around multi-element section if necessary
+			if (div.childElementCount > 1) {
+				dom.appendChild(div);
+			} else if (div.childElementCount) {
+				dom.appendChild(div.firstChild);
+			}
+
 		}
 	}
 
