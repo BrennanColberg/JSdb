@@ -76,7 +76,7 @@ function ajaxPOST(url, onSuccess, arguments) {
 /***** Standard DOM Shortcuts *****/
 
 /**
- * General shorthand selector function.
+ * Single DOM selector function.
  * 
  * @param {string} selector	CSS attribute to search with
  * @param {object} parent	an optional DOM element to base the search on
@@ -84,6 +84,17 @@ function ajaxPOST(url, onSuccess, arguments) {
  */
 function $(selector, parent) {
 	return (parent ? parent : document).querySelector(selector);
+}
+
+/**
+ * Multiple DOM selector function.
+ * 
+ * @param {string} selector	CSS attribute to search with
+ * @param {object} parent	an optional DOM element to base the search on
+ * @return {array}	all selected DOM elements
+ */
+function $$(selector, parent) {
+	return (parent ? parent : document).querySelectorAll(selector);
 }
 
 /**
