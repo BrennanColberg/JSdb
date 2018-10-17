@@ -13,6 +13,8 @@
 
 		$("body").appendChild(ce("ul", "test", ce("li", undefined, "hi this is the first method"), ce("li", undefined, "wow this is cool", ce("marquee", undefined, "this is deprecated!"))));
 
+		saveCookie("test", Date.now());
+
 	});
 
 }();
