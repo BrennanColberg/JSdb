@@ -32,6 +32,13 @@
 	}
 
 	function generateMenu(dom, json) {
+		let data = JSON.parse(json);
+		let entries = Object.keys(data);
+		for (let i = 0; i < entries.length; i++) {
+			let link = ce("a", null, entries[i]);
+			link.href = data[entries[i]];
+			dom.appendChild(link);
+		}
 	}
 
 })();
