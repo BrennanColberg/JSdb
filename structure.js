@@ -4,7 +4,10 @@
 (function () {
 
 	let generatorMethods = {
-		"menu": generateMenu
+		"menu": generateMenu,
+		"html": embedHTML,
+		"text": embedText,
+		"article": generateArticle
 	};
 
 	window.addEventListener("load", function () {
@@ -18,14 +21,16 @@
 		let classes = dom.classList;
 		if (classes.contains("generate")) {
 			// makes sure it has "generate [method] [url]"
-			if (classes.length > 2) {
+			if (classes.length > 1) {
 				let generator = generatorMethods[classes.item(1)];
-				if (generator) {
-					ajaxGET(classes.item(2), function (json) {
+				if (generator && dom.getAttribute("src")) {
+					ajaxGET(dom.getAttribute("src"), function (json) {
 						generator(dom, json);
+						// change "generate" to past tense to indicate success
+						dom.className = dom.className.replace("generate", "generated");
 					});
-					// change "generate" to past tense to indicate success
-					dom.className = dom.className.replace("generate", "generated");
+				} else {
+					console.error("Invalid generation attempt!");
 				}
 			}
 		}
@@ -39,6 +44,18 @@
 			link.href = data[entries[i]];
 			dom.appendChild(link);
 		}
+	}
+
+	function generateArticle(dom, text) {
+
+	}
+
+	function embedHTML(dom, html) {
+		dom.innerHTML = html;
+	}
+
+	function embedText(dom, text) {
+		dom.textContent = text;
 	}
 
 })();
