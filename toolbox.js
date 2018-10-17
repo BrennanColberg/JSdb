@@ -200,3 +200,48 @@ function cookieEquals(title, data, path = "/") {
 function cookieExists(title, path = "/") {
 	return !cookieEquals(title, undefined, path);
 }
+
+
+/***** Mathematics Methods *****/
+
+/**
+ * Restricts a number to between two bounds, adding or subtracting the full
+ * size of the range until it fits within the acceptable range (exceeding the
+ * boundary "wraps" the value to the other side).
+ * 
+ * @param {number} num 	number to restrict
+ * @param {number} min 	low end of acceptable range
+ * @param {number} max 	high end of acceptable range
+ * @return {number} 	number, adjusted if necessary to fit within range
+ */
+function wrap(num, min, max) {
+	let r = max - min + 1;
+	while (num > max) num -= r;
+	while (num < min) num += r;
+	return num;
+}
+
+/**
+ * Restricts a number to between two bounds, cutting it to the max or min if it
+ * exceeds the acceptable range (the boundary "clamps" down on excessive nums).
+ * 
+ * @param {number} num 	number to restrict
+ * @param {number} min 	low end of acceptable range
+ * @param {number} max 	high end of acceptable range
+ * @return {number} 	number, adjusted if necessary to fit within range
+ */
+function clamp(num, min, max) {
+	return Math.min(Math.max(num, min), max);
+}
+
+/**
+ * Checks whether a number lies within a given range.
+ * 
+ * @param {number} num 	number to test
+ * @param {number} min 	low end of range
+ * @param {number} max 	high end of range
+ * @return {boolean} 	whether or not the number lies within the range
+ */
+function within(num, min, max) {
+	return num >= min && num <= max;
+}
