@@ -47,7 +47,33 @@
 	}
 
 	function generateArticle(dom, text) {
+		let lines = text.split("\n");
+		for (let i = 0; i < lines.length; i++) {
+			let line = lines[i];
 
+			// header catch
+			if (line.startsWith("#")) {
+				// figure out which header it is
+				let headerNumber = 1;
+				while (line.charAt(headerNumber) === "#" && headerNumber < 6)
+					headerNumber++;
+				console.log(line.charAt(headerNumber));
+				console.log(headerNumber);
+				line = line.substr(headerNumber, line.length - 1);
+				dom.appendChild(ce("h" + headerNumber, null, line));
+			}
+
+			// paragraph parser
+			else if (i === lines.length - 1 || !lines[i + 1]) { // standard
+				dom.appendChild(ce("p", null, line));
+			} else if (false) { // simple line end
+				let p = ce("p", null, line);
+				p.appendChild(ce("br"));
+				p.appendChild(document.createTextNode(lines[i + 1]));
+				dom.appendChild(p);
+			}
+
+		}
 	}
 
 	function embedHTML(dom, html) {
