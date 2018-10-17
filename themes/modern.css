@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
+@import url("https://fonts.googleapis.com/css?family=K2D");
+@import url("https://fonts.googleapis.com/css?family=Niramit");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
+:root {
+	--color-light: lightgray;
+	--color-mid: darkgray;
+	--color-dark: black;
+	--color-accent: lightgreen;
+
+	--color-header-background: var(--color-light);
+}
+
+body {
+	margin: 0px;
+	color: var(--color-dark);
+}
+
+body > header {
+	width: 100%;
+	max-width: 900px;
+	margin: auto;
+	border-radius: 0 0 15px 15px;
+	padding: 2px;
+	display: flex;
+	justify-content: space-around;
+	flex-flow: row wrap;
+	background-color: var(--color-header-background);
+	position: sticky;
+	top: 0;
+	opacity: 0.9;
+}
+
+header h1 {
+	margin: auto;
+	font-family: "K2D";
+	padding: 0;
+}
+
+nav {
+	display: flex;
+	justify-content: center;
+	flex-flow: row wrap;
+	margin: auto 0px;
+}
+
+nav a {
+	padding-top: 0px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin: 8px;
+	font-size: 14pt;
+	color: black;
+	font-family: "K2D";
+	font-family: "Niramit";
+	text-decoration: none;
+}
+
+main {
+	width: 70%;
+	max-width: 800px;
+	margin: auto;
+	text-align: justify;
+}
+
+p {
+	font-family: Georgia;
+}

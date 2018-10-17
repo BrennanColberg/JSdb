@@ -2,15 +2,28 @@
 <html>
 
 <head>
+	<title>Sample Modern BDev Website</title>
+	<link href="../themes/modern.css" rel="stylesheet">
 	<script src="../toolbox.js"></script>
 	<script src="../structure.js"></script>
-	<script src="index.js"></script>
+	<script src="../themes/modern.js"></script>
 </head>
 
 <body>
-	<pre id="output"></pre>
-	<nav generate class="menu" src="../templates/menu.json"></nav>
-	<article generate class="article" src="../templates/article.txt"></article>
+	<header>
+		<h1>Brennan Colberg</h1>
+		<nav generate class="menu" src="menu.json"></nav>
+	</header>
+	<main>
+		<article generate class="article" src="lipsum.txt"></article>
+		<section>
+			<h1>Another section!</h1>
+			<header>this is a header that should be stiiicky</header>
+		</section>
+		<article generate class="article" src="lipsum.txt"></article>
+		<article generate class="article" src="lipsum.txt"></article>
+		<footer generate class="footer" src="footer.json"></footer>
+	</main>
 </body>
 
 </html>
