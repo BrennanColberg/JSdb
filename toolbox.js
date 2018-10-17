@@ -10,7 +10,7 @@ function checkStatus(r) {
 		return r.text();
 	} else {
 		return Promise.reject(
-			new Error(r.status + ": " + r.statusText);
+			new Error(r.status + ": " + r.statusText)
 		);
 	}
 }

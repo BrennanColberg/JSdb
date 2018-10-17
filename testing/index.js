@@ -1,21 +1,16 @@
 "use strict";
-!function() {
-	
-	window.addEventListener("load", function() {
-		
-		$("save").onclick = putCookie;
-		$("load").onclick = getCookie;
-		
+! function () {
+
+	window.addEventListener("load", function () {
+
+		ajaxGET("return_args.php", function (text) {
+			$("output").textContent = text;
+		}, {
+			"test": 1,
+			"why": "no",
+			"foo": "bar"
+		});
+
 	});
-	
-	function putCookie() {
-		save(JSON.stringify({"name":"brennan", "working":true}));
-	}
-	
-	function getCookie() {
-		let json = load();
-		console.log();
-		$("output").textContent = json;
-	}
-	
+
 }();
