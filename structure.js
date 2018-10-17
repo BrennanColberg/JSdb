@@ -11,28 +11,23 @@
 	};
 
 	window.addEventListener("load", function () {
-		let generated = $$(".generate");
+		let generated = $$("[generate]");
 		for (let i = 0; i < generated.length; i++) {
 			generate(generated[i]);
 		}
 	});
 
 	function generate(dom) {
-		let classes = dom.classList;
-		if (classes.contains("generate")) {
-			// makes sure it has "generate [method] [url]"
-			if (classes.length > 1) {
-				let generator = generatorMethods[classes.item(1)];
-				if (generator && dom.getAttribute("src")) {
+		if (dom.getAttribute("src")) {
+			for (let type of Object.keys(generatorMethods)) {
+				if (dom.classList.contains(type)) {
 					ajaxGET(dom.getAttribute("src"), function (json) {
-						generator(dom, json);
-						// change "generate" to past tense to indicate success
-						dom.className = dom.className.replace("generate", "generated");
+						generatorMethods[type](dom, json);
 					});
-				} else {
-					console.error("Invalid generation attempt!");
 				}
 			}
+		} else {
+			console.error("Invalid generation attempt!");
 		}
 	}
 
