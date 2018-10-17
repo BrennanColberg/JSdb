@@ -47,32 +47,43 @@
 	}
 
 	function generateArticle(dom, text) {
-		let lines = text.split("\n");
-		for (let i = 0; i < lines.length; i++) {
-			let line = lines[i];
+		let subsections = text.split("\n\n");
+		for (let i = 0; i < subsections.length; i++) {
+			let subsection = subsections[i];
+			let lines = subsection.split("\n");
+			for (let j = 0; j < lines.length; j++) {
+				let line = lines[j];
 
-			// header catch
-			if (line.startsWith("#")) {
-				// figure out which header it is
-				let headerNumber = 1;
-				while (line.charAt(headerNumber) === "#" && headerNumber < 6)
-					headerNumber++;
-				console.log(line.charAt(headerNumber));
-				console.log(headerNumber);
-				line = line.substr(headerNumber, line.length - 1);
-				dom.appendChild(ce("h" + headerNumber, null, line));
+				// header
+				if (line.startsWith("#")) {
+					// figure out which header it is
+					let headerNumber = 1;
+					while (line.charAt(headerNumber) === "#" && headerNumber < 6)
+						headerNumber++;
+					// remove indicator
+					line = line.substr(headerNumber, line.length - 1);
+					// add element!
+					dom.appendChild(ce("h" + headerNumber, null, line));
+				}
+
+				// list (only one layer deep as of yet)
+				else if (line.startsWith("\t")) {
+					let list = ce("ul");
+					j--;
+					while (j + 1 < lines.length && lines[j + 1].startsWith("\t")) {
+						j++;
+						line = lines[j].substr(1, lines[j].length - 1);
+						list.appendChild(ce("li", null, line));
+					}
+					dom.appendChild(list);
+				}
+
+				// paragraph
+				else {
+					dom.appendChild(ce("p", null, line));
+				}
+
 			}
-
-			// paragraph parser
-			else if (i === lines.length - 1 || !lines[i + 1]) { // standard
-				dom.appendChild(ce("p", null, line));
-			} else if (false) { // simple line end
-				let p = ce("p", null, line);
-				p.appendChild(ce("br"));
-				p.appendChild(document.createTextNode(lines[i + 1]));
-				dom.appendChild(p);
-			}
-
 		}
 	}
 
