@@ -14,8 +14,9 @@
 		"NAV": generateMenu,
 		"ARTICLE": generateArticle,
 		"HTML": embedHTML,
+		"BODY": embedHTML,
 		"DIV": embedHTMl,
-		"P": embedText,
+		"P": embedText
 	};
 
 	window.addEventListener("load", function () {
