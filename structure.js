@@ -15,7 +15,7 @@
 		"ARTICLE": generateArticle,
 		"HTML": embedHTML,
 		"BODY": embedHTML,
-		"DIV": embedHTMl,
+		"DIV": embedHTML,
 		"P": embedText
 	};
 
