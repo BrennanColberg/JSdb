@@ -10,6 +10,12 @@
 		"article": generateArticle
 	};
 
+	let defaultElementGeneratorMethods = {
+		"NAV": generateMenu,
+		"ARTICLE": generateArticle,
+		"HTML": embedHTML
+	};
+
 	window.addEventListener("load", function () {
 		let generated = $$("[generate]");
 		for (let i = 0; i < generated.length; i++) {
@@ -17,20 +23,28 @@
 		}
 	});
 
+	// selects the proper function & generates it
 	function generate(dom) {
-		if (dom.getAttribute("src")) {
-			for (let type of Object.keys(generatorMethods)) {
-				if (dom.classList.contains(type)) {
-					ajaxGET(dom.getAttribute("src"), function (json) {
-						generatorMethods[type](dom, json);
-					});
-				}
-			}
-		} else {
-			console.error("Invalid generation attempt!");
+		let chosenMethod = undefined;
+
+		// chooses default action
+		if (dom.tagName in defaultElementGeneratorMethods)
+			chosenMethod = defaultElementGeneratorMethods[dom.tagName];
+
+		// chooses specified method through class (overrides default if both)
+		for (let className of dom.classList)
+			if (className in generatorMethods)
+				chosenMethod = generatorMethods[className];
+
+		// runs the chosen generator method if one was selected
+		if (chosenMethod) {
+			ajaxGET(dom.getAttribute("src"), function (json) {
+				chosenMethod(dom, json);
+			});
 		}
 	}
 
+	// generates a menu!
 	function generateMenu(dom, json) {
 		let data = JSON.parse(json);
 		let entries = Object.keys(data);
@@ -41,6 +55,7 @@
 		}
 	}
 
+	// generates an article (effectively just Markdown)
 	function generateArticle(dom, text) {
 		let sections = text.split("\n\n");
 		for (let i = 0; i < sections.length; i++) {
@@ -85,14 +100,15 @@
 			} else if (div.childElementCount) {
 				dom.appendChild(div.firstChild);
 			}
-
 		}
 	}
 
+	// copies HTML into innerHTML
 	function embedHTML(dom, html) {
 		dom.innerHTML = html;
 	}
 
+	// copies content into textContent
 	function embedText(dom, text) {
 		dom.textContent = text;
 	}
