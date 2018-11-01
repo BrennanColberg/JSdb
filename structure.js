@@ -13,7 +13,9 @@
 	let defaultElementGeneratorMethods = {
 		"NAV": generateMenu,
 		"ARTICLE": generateArticle,
-		"HTML": embedHTML
+		"HTML": embedHTML,
+		"DIV": embedHTMl,
+		"P": embedText,
 	};
 
 	window.addEventListener("load", function () {
